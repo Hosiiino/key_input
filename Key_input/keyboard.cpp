@@ -1,0 +1,37 @@
+////////////////////////////////////
+// Include
+////////////////////////////////////
+#include "keyboard.h"
+
+////////////////////////////////////
+// メンバ変数の実体を宣言
+////////////////////////////////////
+Keyboard* Key::key_;
+Keyboard::State Key::state_;
+Keyboard::KeyboardStateTracker Key::tracker_;
+
+////////////////////////////////////
+// 初期化
+////////////////////////////////////
+bool Key::init()
+{
+    // Keyクラスのメモリを確保
+    key_ = new Keyboard();
+
+    // メモリ確保チェック
+    if( !key_ )
+    {
+        return false;
+    }
+    return true;
+}
+
+
+////////////////////////////////////
+// 更新
+////////////////////////////////////
+void Key::update()
+{
+    state_ = key_->GetState();
+    tracker_.Update( state_ );
+}
